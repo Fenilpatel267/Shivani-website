@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hi Shivani</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffe6f2, #ffd9ec, #ffeef7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    button {
+      padding: 18px 40px;
+      font-size: 22px;
+      background: #ff66b3;
+      border: none;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      transition: 0.25s;
+      z-index: 2;
+    }
+
+    button:hover {
+      transform: scale(1.12);
+      background: #ff4da6;
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 38px;
+      font-weight: bold;
+      color: #cc0066;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      text-shadow: 0 0 10px #ff99cc;
+      z-index: 1;
+      position: relative;
+    }
+
+    .heart {
+      color: red;
+      font-size: 45px;
+      animation: heartbeat 1s infinite;
+      margin-left: 10px;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+
+    .floating-heart {
+      position: absolute;
+      color: #ff4da6;
+      font-size: 25px;
+      animation: floatUp 4s linear infinite;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-300px) scale(1.6); opacity: 0; }
+    }
+
+    #nextBtn, #nextBtn2 {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 14px 28px;
+      font-size: 20px;
+      background: #ff80bf;
+      border-radius: 30px;
+      display: none;
+      z-index: 3;
+    }
+
+    #popup, #popupLove {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: 0.4s ease;
+      font-size: 24px;
+      color: #cc0066;
+      width: 300px;
+      z-index: 9999;
+    }
+
+    .show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup-btn {
+      margin: 15px;
+      padding: 12px 25px;
+      font-size: 20px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #ff4da6;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="showMessage()">Click me ✨💕</button>
+
+  <div id="message"></div>
+
+  <button id="nextBtn" onclick="openPopup()">Next ➜</button>
+
+  <!-- FIRST POPUP -->
+  <div id="popup">
+    Will you be my girlfriend? 💖  
+    <br><br>
+    <button class="popup-btn yes" onclick="answerYes()">Yes</button>
+    <button class="popup-btn no" onclick="answerNo()">No</button>
+  </div>
+
+  <!-- LOVE POPUP -->
+  <div id="popupLove">
+    Am I allowed to say I love you to you? ❤️  
+    <br><br>
+    <button class="popup-btn yes" onclick="loveYes()">Yes</button>
+    <button class="popup-btn no" onclick="loveNo()">No</button>
+  </div>
+
+  <button id="nextBtn2" onclick="openLovePopup()">Next ➜</button>
+
+  <script>
+    function showMessage() {
+      const msg = document.getElementById("message");
+      msg.innerHTML = "Hi Shivani <span class='heart'>❤️</span>";
+      msg.style.opacity = 1;
+      msg.style.transform = "translateY(0)";
+      document.getElementById("nextBtn").style.display = "block";
+
+      for (let i = 0; i < 12; i++) {
+        let heart = document.createElement("div");
+        heart.classList.add("floating-heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "0px";
+        heart.style.animationDelay = Math.random() * 2 + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+      }
+    }
+
+    function openPopup() {
+      document.getElementById("popup").classList.add("show");
+    }
+
+    function answerYes() {
+      document.getElementById("popup").classList.remove("show");
+      alert("Now you are my official girlfriend ❤️✨");
+      document.getElementById("nextBtn2").style.display = "block";
+    }
+
+    function answerNo() {
+      alert("You are not allowed to say no 😤💕");
+    }
+
+    function openLovePopup() {
+      document.getElementById("popupLove").classList.add("show");
+    }
+
+    function loveYes() {
+      alert("I love you ❤️✨💞");
+    }
+
+    function loveNo() {
+      alert("You are not allowed to say no 😤💕");
+    }
+  </script>
+
+</body>
+</html>
